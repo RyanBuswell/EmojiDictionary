@@ -8,11 +8,31 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    //Connect the Base Tableview
+    @IBOutlet weak var baseTable: UITableView!
+    
+    //Array of emojis
+    var emojis = ["😀", "😎", "😍", "😈", "😹"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        baseTable.dataSource = self
+        baseTable.delegate = self
+    }
+    //Where the table gets row #
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return emojis.count
+    }
+    
+    //What is inside each row
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        cell.textLabel?.text = emojis[indexPath.row]
+        return cell
     }
 
 
